@@ -57,6 +57,7 @@ public class MemberService {
             throw new OverlapMemberInfoException();
         }
 
+        // 회원정보 객체 저장
         Member member = Member.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -67,7 +68,9 @@ public class MemberService {
 
         memberRepository.save(member);
 
+        // 로깅
         log.info("NEW MEMBER REGISTRATION : {}", member);
+        log.info("NEW MEMBER REGISTRATION IP : {}", commonUtil.getIp());
 
         return new ResponseEntity<>(new MemberResponse(member), HttpStatus.OK);
     }
@@ -92,6 +95,10 @@ public class MemberService {
 
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
         TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+
+        // 로깅
+        log.info("MEMBER LOGIN : {}", member);
+        log.info("MEMBER LOGIN IP : {}", commonUtil.getIp());
 
         return new ResponseEntity<>(tokenInfo, HttpStatus.OK);
     }
