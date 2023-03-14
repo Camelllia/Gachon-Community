@@ -13,14 +13,13 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/member")
 public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/member-join")
+    @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody @Valid MemberCreateRequest request) {
         return memberService.join(request);
     }
-
 }
