@@ -18,9 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
+                .antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .anyRequest().authenticated();
     }
 
     @Bean
