@@ -1,5 +1,7 @@
 package com.gachon.community.exception.controller;
 
+import com.gachon.community.member.exception.OverlapMemberInfoException;
+import com.gachon.community.member.exception.PasswordMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,5 +19,19 @@ public class ExceptionController {
     @ResponseBody
     public ResponseEntity<String> invaildRequestHandler(MethodArgumentNotValidException e) {
         return new ResponseEntity<>("-10", HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(PasswordMismatchException.class)
+    @ResponseBody
+    public ResponseEntity<String> invaildRequestHandler(PasswordMismatchException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(OverlapMemberInfoException.class)
+    @ResponseBody
+    public ResponseEntity<String> invaildRequestHandler(OverlapMemberInfoException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

@@ -31,15 +31,12 @@ public class Member {
     private String password;
 
     @Column(nullable = false)
-    private String salt;
-
-    @Column(nullable = false)
     @ColumnDefault("false")
     private boolean delYn;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private Date registDate;
+    private Date createDate;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)

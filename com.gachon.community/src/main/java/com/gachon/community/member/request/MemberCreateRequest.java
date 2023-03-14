@@ -14,5 +14,8 @@ public class MemberCreateRequest {
     private String password;
 
     @NotBlank()
+    private String passwordCheck;
+
+    @NotBlank()
     private String nickname;
 }
