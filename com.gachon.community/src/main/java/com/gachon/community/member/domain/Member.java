@@ -34,6 +34,8 @@ public class Member {
 
     private String registIp;
 
+    private String role;
+
     @Column(nullable = false)
     @ColumnDefault("false")
     private boolean delYn;
@@ -50,10 +52,11 @@ public class Member {
     private Date deleteDate;
 
     @Builder
-    public Member(String email, String password, String nickname, String registIp) {
+    public Member(String email, String password, String nickname, String registIp, String role) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.registIp = registIp;
+        this.role = role;
     }
 }

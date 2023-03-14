@@ -50,6 +50,7 @@ public class MemberService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .nickname(request.getNickname())
                 .registIp(commonUtil.getIp())
+                .role("ROLE_USER")
                 .build();
 
         memberRepository.save(member);
