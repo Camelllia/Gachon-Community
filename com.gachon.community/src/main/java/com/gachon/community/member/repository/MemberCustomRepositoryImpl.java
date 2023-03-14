@@ -14,9 +14,18 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
+    @Override
     public Optional<Member> existByEmailAndNickname(String email, String nickname) {
         return Optional.ofNullable(jpaQueryFactory.selectFrom(member)
                 .where(member.email.eq(email).or(member.nickname.eq(nickname)))
+                .where(member.delYn.eq(Boolean.FALSE))
+                .fetchOne());
+    }
+
+    @Override
+    public Optional<Member> findByEmail(String email) {
+        return Optional.ofNullable(jpaQueryFactory.selectFrom(member)
+                .where(member.email.eq(email))
                 .where(member.delYn.eq(Boolean.FALSE))
                 .fetchOne());
     }

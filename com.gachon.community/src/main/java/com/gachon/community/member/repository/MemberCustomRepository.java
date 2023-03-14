@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface MemberCustomRepository {
 
     Optional<Member> existByEmailAndNickname(String email, String nickname);
+
+    Optional<Member> findByEmail(String email);
 }

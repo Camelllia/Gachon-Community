@@ -2,6 +2,7 @@ package com.gachon.community.exception.controller;
 
 import com.gachon.community.exception.response.ErrorResponse;
 import com.gachon.community.member.exception.InvaildEmailPatternException;
+import com.gachon.community.member.exception.MemberNotFoundException;
 import com.gachon.community.member.exception.OverlapMemberInfoException;
 import com.gachon.community.member.exception.PasswordMismatchException;
 import org.springframework.http.HttpStatus;
@@ -55,6 +56,18 @@ public class ExceptionController {
     @ExceptionHandler(InvaildEmailPatternException.class)
     @ResponseBody
     public ErrorResponse invaildRequestHandler(InvaildEmailPatternException e) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code("400")
+                .message(e.getMessage())
+                .build();
+
+        return errorResponse;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MemberNotFoundException.class)
+    @ResponseBody
+    public ErrorResponse invaildRequestHandler(MemberNotFoundException e) {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .code("400")
                 .message(e.getMessage())
