@@ -3,7 +3,9 @@ package com.gachon.community.member.controller;
 import com.gachon.community.exception.response.ErrorResponse;
 import com.gachon.community.member.domain.Member;
 import com.gachon.community.member.request.MemberCreateRequest;
+import com.gachon.community.member.request.MemberLoginRequest;
 import com.gachon.community.member.response.MemberResponse;
+import com.gachon.community.member.response.TokenInfo;
 import com.gachon.community.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -36,5 +38,15 @@ public class MemberController {
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody @Valid MemberCreateRequest request) {
         return memberService.join(request);
+    }
+
+    @Operation(summary = "로그인", description = "로그인 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "회원가입 성공 케이스", content = @Content(schema = @Schema(implementation = TokenInfo.class))),
+            @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody @Valid MemberLoginRequest request) {
+        return memberService.login(request);
     }
 }

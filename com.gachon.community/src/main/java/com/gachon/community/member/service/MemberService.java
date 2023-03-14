@@ -3,15 +3,23 @@ package com.gachon.community.member.service;
 import com.gachon.community.common.util.CommonUtil;
 import com.gachon.community.member.domain.Member;
 import com.gachon.community.member.exception.InvaildEmailPatternException;
+import com.gachon.community.member.exception.MemberNotFoundException;
 import com.gachon.community.member.exception.OverlapMemberInfoException;
 import com.gachon.community.member.exception.PasswordMismatchException;
+import com.gachon.community.member.provider.JwtTokenProvider;
 import com.gachon.community.member.repository.MemberRepository;
 import com.gachon.community.member.request.MemberCreateRequest;
+import com.gachon.community.member.request.MemberLoginRequest;
 import com.gachon.community.member.response.MemberResponse;
+import com.gachon.community.member.response.TokenInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +35,10 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     private final CommonUtil commonUtil;
+
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+
+    private final JwtTokenProvider jwtTokenProvider;
 
     public ResponseEntity<?> join(MemberCreateRequest request) {
 
@@ -58,5 +70,34 @@ public class MemberService {
         log.info("NEW MEMBER REGISTRATION : {}", member);
 
         return new ResponseEntity<>(new MemberResponse(member), HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> login(MemberLoginRequest request) {
+
+        // 1. Login ID/PW 를 기반으로 Authentication 객체 생성
+        // 이때 authentication 는 인증 여부를 확인하는 authenticated 값이 false
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
+
+        Member member = memberRepository.findByEmail(request.getEmail())
+                .orElseThrow(MemberNotFoundException::new);
+
+        // 비밀번호 검사
+        if(!passwordValidator(member, request.getPassword())) {
+            throw new MemberNotFoundException();
+        }
+
+        // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
+        // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
+        // 3. 인증 정보를 기반으로 JWT 토큰 생성
+        TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+
+        return new ResponseEntity<>(tokenInfo, HttpStatus.OK);
+    }
+
+    public boolean passwordValidator(Member member, String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder.matches(password, member.getPassword());
     }
 }
