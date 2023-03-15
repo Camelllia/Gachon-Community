@@ -6,11 +6,10 @@ import com.gachon.community.menu.domain.BoardMenu;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 
 import java.util.Date;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class BoardResponse {
 

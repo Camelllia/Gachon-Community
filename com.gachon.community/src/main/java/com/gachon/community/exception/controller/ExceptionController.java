@@ -8,7 +8,6 @@ import com.gachon.community.member.exception.OverlapMemberInfoException;
 import com.gachon.community.member.exception.PasswordMismatchException;
 import com.gachon.community.menu.exception.MenuNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

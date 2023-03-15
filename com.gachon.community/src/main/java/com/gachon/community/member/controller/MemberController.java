@@ -42,7 +42,7 @@ public class MemberController {
 
     @Operation(summary = "로그인", description = "로그인 API")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "회원가입 성공 케이스", content = @Content(schema = @Schema(implementation = TokenInfo.class))),
+            @ApiResponse(responseCode = "200", description = "로그인 성공 케이스", content = @Content(schema = @Schema(implementation = TokenInfo.class))),
             @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @PostMapping("/login")

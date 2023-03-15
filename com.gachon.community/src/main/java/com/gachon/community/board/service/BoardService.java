@@ -9,6 +9,8 @@ import com.gachon.community.menu.repository.MenuRepository;
 import com.gachon.community.menu.response.BoardMenuResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,18 +25,18 @@ public class BoardService {
 
     private final MenuRepository menuRepository;
 
-    public List<BoardResponse> getBoardLists(Long menuId) {
-        return boardRepository.getBoardLists(menuId).stream()
+    public ResponseEntity<?> getBoardLists(Long menuId) {
+        return new ResponseEntity<>(boardRepository.getBoardLists(menuId).stream()
                 .map(BoardResponse::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    public BoardResponse getBoardItem(Long menuId, Long boardId) {
+    public ResponseEntity<?> getBoardItem(Long menuId, Long boardId) {
 
         BoardMenu boardMenu = menuRepository.findByMenuId(menuId)
                 .orElseThrow(MenuNotFoundException::new);
 
-        return new BoardResponse(boardRepository.getBoardItem(menuId, boardId)
-                .orElseThrow(BoardNotFoundException::new));
+        return new ResponseEntity<>(new BoardResponse(boardRepository.getBoardItem(menuId, boardId)
+                .orElseThrow(BoardNotFoundException::new)), HttpStatus.OK);
     }
 }
