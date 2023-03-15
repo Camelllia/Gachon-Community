@@ -3,6 +3,7 @@ package com.gachon.community.board.domain;
 import com.gachon.community.member.domain.Member;
 import com.gachon.community.menu.domain.BoardMenu;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -26,6 +27,8 @@ public class Board {
 
     @Column(nullable = false)
     private String title;
+
+    private String registIp;
 
     @Column(nullable = false)
     private String content;
@@ -52,4 +55,13 @@ public class Board {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date deleteDate;
+
+    @Builder
+    public Board(String title, String content, String registIp, Member member, BoardMenu boardMenu) {
+        this.title = title;
+        this.content = content;
+        this.registIp = registIp;
+        this.member = member;
+        this.boardMenu = boardMenu;
+    }
 }

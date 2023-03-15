@@ -9,4 +9,6 @@ public interface MemberCustomRepository {
     Optional<Member> existByEmailAndNickname(String email, String nickname);
 
     Optional<Member> findByEmail(String email);
+
+    Optional<Member> findByMemberId(Long id);
 }

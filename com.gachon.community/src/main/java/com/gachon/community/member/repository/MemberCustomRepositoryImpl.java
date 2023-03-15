@@ -29,4 +29,12 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
                 .where(member.delYn.eq(Boolean.FALSE))
                 .fetchOne());
     }
+
+    @Override
+    public Optional<Member> findByMemberId(Long id) {
+        return Optional.ofNullable(jpaQueryFactory.selectFrom(member)
+                .where(member.id.eq(id))
+                .where(member.delYn.eq(Boolean.FALSE))
+                .fetchOne());
+    }
 }

@@ -1,6 +1,7 @@
 package com.gachon.community.menu.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -34,4 +35,9 @@ public class BoardMenu {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date deleteDate;
+
+    @Builder
+    public BoardMenu(String name) {
+        this.name = name;
+    }
 }
