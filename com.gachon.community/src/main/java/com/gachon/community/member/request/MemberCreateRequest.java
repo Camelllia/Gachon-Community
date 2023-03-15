@@ -12,11 +12,11 @@ public class MemberCreateRequest {
     @NotBlank()
     private String email;
 
-    @Schema(description = "유저 비밀번호" , example = "1234!@#")
+    @Schema(description = "유저 비밀번호" , example = "1234")
     @NotBlank()
     private String password;
 
-    @Schema(description = "유저 비밀번호 확인" , example = "1234!@#")
+    @Schema(description = "유저 비밀번호 확인" , example = "1234")
     @NotBlank()
     private String passwordCheck;
 

@@ -12,6 +12,9 @@ spring:
     url: jdbc:mysql://localhost:3306/gachon_community_db_prod?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: root
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 
 springdoc:
   swagger-ui:
@@ -39,6 +42,9 @@ spring:
     url: jdbc:mysql://localhost:3306/gachon_community_db?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: root
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 
 jwt:
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
