@@ -1,7 +1,6 @@
 package com.gachon.community.member.controller;
 
 import com.gachon.community.exception.response.ErrorResponse;
-import com.gachon.community.member.domain.Member;
 import com.gachon.community.member.request.MemberCreateRequest;
 import com.gachon.community.member.request.MemberLoginRequest;
 import com.gachon.community.member.response.MemberResponse;

@@ -2,10 +2,7 @@ package com.gachon.community.exception.controller;
 
 import com.gachon.community.board.exception.BoardNotFoundException;
 import com.gachon.community.exception.response.ErrorResponse;
-import com.gachon.community.member.exception.InvaildEmailPatternException;
-import com.gachon.community.member.exception.MemberNotFoundException;
-import com.gachon.community.member.exception.OverlapMemberInfoException;
-import com.gachon.community.member.exception.PasswordMismatchException;
+import com.gachon.community.member.exception.*;
 import com.gachon.community.menu.exception.MenuNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -95,6 +92,18 @@ public class ExceptionController {
     public ErrorResponse invaildRequestHandler(BoardNotFoundException e) {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .code("400")
+                .message(e.getMessage())
+                .build();
+
+        return errorResponse;
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UnAuthenticatedUserException.class)
+    @ResponseBody
+    public ErrorResponse invaildRequestHandler(UnAuthenticatedUserException e) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code("403")
                 .message(e.getMessage())
                 .build();
 
