@@ -9,7 +9,7 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gachon_community_db_prod?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/gachon_community_db_prod?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: root
   jackson:
@@ -39,7 +39,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gachon_community_db?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/gachon_community_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: root
   jackson:

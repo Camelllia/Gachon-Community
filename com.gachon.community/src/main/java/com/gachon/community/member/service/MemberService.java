@@ -1,6 +1,6 @@
 package com.gachon.community.member.service;
 
-import com.gachon.community.common.util.CommonUtil;
+import com.gachon.community.util.common.CommonUtil;
 import com.gachon.community.member.domain.Member;
 import com.gachon.community.member.exception.InvaildEmailPatternException;
 import com.gachon.community.member.exception.MemberNotFoundException;
@@ -22,8 +22,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.validation.constraints.Email;
 
 @Slf4j
 @Service

@@ -5,22 +5,20 @@ import com.gachon.community.board.exception.BoardNotFoundException;
 import com.gachon.community.board.repository.BoardRepository;
 import com.gachon.community.board.request.BoardCreateRequest;
 import com.gachon.community.board.response.BoardResponse;
-import com.gachon.community.common.util.CommonUtil;
-import com.gachon.community.common.util.SecurityUtil;
+import com.gachon.community.util.common.CommonUtil;
+import com.gachon.community.util.security.SecurityUtil;
 import com.gachon.community.member.domain.Member;
 import com.gachon.community.member.exception.MemberNotFoundException;
 import com.gachon.community.member.repository.MemberRepository;
 import com.gachon.community.menu.domain.BoardMenu;
 import com.gachon.community.menu.exception.MenuNotFoundException;
 import com.gachon.community.menu.repository.MenuRepository;
-import com.gachon.community.menu.response.BoardMenuResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j

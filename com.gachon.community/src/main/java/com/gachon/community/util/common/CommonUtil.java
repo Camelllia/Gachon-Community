@@ -1,4 +1,4 @@
-package com.gachon.community.common.util;
+package com.gachon.community.util.common;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;

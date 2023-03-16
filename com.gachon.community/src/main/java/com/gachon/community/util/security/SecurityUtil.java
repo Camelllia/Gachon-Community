@@ -1,4 +1,4 @@
-package com.gachon.community.common.util;
+package com.gachon.community.util.security;
 
 import com.gachon.community.member.exception.UnAuthenticatedUserException;
 import org.springframework.security.core.Authentication;
