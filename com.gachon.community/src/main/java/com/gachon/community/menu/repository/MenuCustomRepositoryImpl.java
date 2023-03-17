@@ -16,7 +16,7 @@ public class MenuCustomRepositoryImpl implements MenuCustomRepository {
     }
 
     @Override
-    public List<BoardMenu> getAllMenus() {
+    public List<BoardMenu> getMenuList() {
         return jpaQueryFactory.selectFrom(boardMenu)
                 .where(boardMenu.delYn.eq(Boolean.FALSE))
                 .orderBy(boardMenu.createDate.asc())

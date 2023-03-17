@@ -31,8 +31,8 @@ public class BoardController {
             @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/{menuId}")
-    public ResponseEntity<?> getBoardLists(@PathVariable("menuId") Long menuId) {
-        return boardService.getBoardLists(menuId);
+    public ResponseEntity<?> getBoardList(@PathVariable("menuId") Long menuId) {
+        return boardService.getBoardList(menuId);
     }
 
     @Operation(summary = "게시글 조회", description = "게시글 조회 API")

@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Tag(name = "BOARD MENU", description = "게시글 메뉴 API")
 @RestController
 @RequiredArgsConstructor
@@ -32,7 +30,7 @@ public class MenuController {
             @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/menus")
-    public ResponseEntity<?> getAllMenus() {
-        return menuService.getAllMenus();
+    public ResponseEntity<?> getMenuList() {
+        return menuService.getMenuList();
     }
 }

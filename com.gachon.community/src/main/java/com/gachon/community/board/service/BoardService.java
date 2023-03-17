@@ -34,8 +34,8 @@ public class BoardService {
 
     private final CommonUtil commonUtil;
 
-    public ResponseEntity<?> getBoardLists(Long menuId) {
-        return new ResponseEntity<>(boardRepository.getBoardLists(menuId).stream()
+    public ResponseEntity<?> getBoardList(Long menuId) {
+        return new ResponseEntity<>(boardRepository.getBoardList(menuId).stream()
                 .map(BoardResponse::new)
                 .collect(Collectors.toList()), HttpStatus.OK);
     }

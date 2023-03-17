@@ -17,7 +17,7 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     }
 
     @Override
-    public List<Board> getBoardLists(Long menuId) {
+    public List<Board> getBoardList(Long menuId) {
         return jpaQueryFactory.selectFrom(board)
                 .where(board.delYn.eq(Boolean.FALSE))
                 .where(board.boardMenu.id.eq(menuId))

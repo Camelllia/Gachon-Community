@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface BoardCustomRepository {
 
-    List<Board> getBoardLists(Long menuId);
+    List<Board> getBoardList(Long menuId);
 
     Optional<Board> getBoardItem(Long menuId, Long boardId);
 }

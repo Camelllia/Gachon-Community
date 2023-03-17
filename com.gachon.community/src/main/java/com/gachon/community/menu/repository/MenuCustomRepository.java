@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface MenuCustomRepository {
 
-    List<BoardMenu> getAllMenus();
+    List<BoardMenu> getMenuList();
 
     Optional<BoardMenu> findByMenuId(Long menuId);
 }
