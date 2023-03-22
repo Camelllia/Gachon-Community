@@ -24,5 +24,5 @@
 ![Amazon RDS](https://img.shields.io/badge/Amazon%20RDS-527FFF?style=for-the-badge&logo=Amazon%20RDS&logoColor=61DAFB)
 
 ## API Server ENV(Expected)
-> **DEV** : [http://dev-gc-community-pf-api.com/](http://dev-gc-community-pf-api.com/) <br>
-> **PROD** : [http://gc-community-pf-api.com/](http://gc-community-pf-api.com/)<br>
+> **DEV** : [http://dev-gc-community-pf-api.com](http://dev-gc-community-pf-api.com)<br>
+> **PROD** : [http://gc-community-pf-api.com](http://gc-community-pf-api.com)<br>
