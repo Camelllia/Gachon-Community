@@ -4,6 +4,7 @@ import com.gachon.community.board.domain.Board;
 import com.gachon.community.board.exception.BoardNotFoundException;
 import com.gachon.community.board.repository.BoardRepository;
 import com.gachon.community.board.request.BoardCreateRequest;
+import com.gachon.community.board.request.BoardUpdateRequest;
 import com.gachon.community.board.response.BoardResponse;
 import com.gachon.community.util.common.CommonUtil;
 import com.gachon.community.util.security.SecurityUtil;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
@@ -74,5 +76,15 @@ public class BoardService {
         log.info("CREATE NEW BOARD ITEM REGISTRATION IP : {}", commonUtil.getIp());
 
         return new ResponseEntity<>(new BoardResponse(board), HttpStatus.OK);
+    }
+
+    @Transactional
+    public ResponseEntity<?> update(Long boardId, BoardUpdateRequest request) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(BoardNotFoundException::new);
+
+        boardRepository.update(boardId, request);
+
+        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
     }
 }

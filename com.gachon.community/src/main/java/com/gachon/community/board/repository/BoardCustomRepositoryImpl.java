@@ -3,6 +3,8 @@ package com.gachon.community.board.repository;
 import static com.gachon.community.board.domain.QBoard.board;
 
 import com.gachon.community.board.domain.Board;
+import com.gachon.community.board.request.BoardUpdateRequest;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.util.List;
@@ -32,5 +34,15 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                 .where(board.boardMenu.id.eq(menuId))
                 .where(board.id.eq(boardId))
                 .fetchOne());
+    }
+
+    @Override
+    public long update(Long boardId, BoardUpdateRequest request) {
+        return jpaQueryFactory.update(board)
+                .set(board.title, request.getTitle())
+                .set(board.content, request.getContent())
+                .set(board.updateDate, Expressions.currentTimestamp())
+                .where(board.id.eq(boardId))
+                .execute();
     }
 }

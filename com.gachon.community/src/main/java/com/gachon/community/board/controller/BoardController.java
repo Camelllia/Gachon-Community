@@ -1,6 +1,7 @@
 package com.gachon.community.board.controller;
 
 import com.gachon.community.board.request.BoardCreateRequest;
+import com.gachon.community.board.request.BoardUpdateRequest;
 import com.gachon.community.board.response.BoardResponse;
 import com.gachon.community.board.service.BoardService;
 import com.gachon.community.exception.response.ErrorResponse;
@@ -53,5 +54,15 @@ public class BoardController {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody @Valid BoardCreateRequest request) {
         return boardService.create(request);
+    }
+
+    @Operation(summary = "게시글 수정", description = "게시글 수정 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "수정 성공 케이스", content = @Content(schema = @Schema(implementation = Boolean.class))),
+            @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+    @PatchMapping("/{boardId}/update")
+    public ResponseEntity<?> update(@PathVariable("boardId") Long boardId, @RequestBody @Valid BoardUpdateRequest request) {
+        return boardService.update(boardId, request);
     }
 }
