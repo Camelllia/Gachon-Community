@@ -1,4 +1,4 @@
-package com.gachon.community.board.domain;
+package com.gachon.community.feed.domain;
 
 import com.gachon.community.member.domain.Member;
 import com.gachon.community.menu.domain.BoardMenu;
@@ -13,20 +13,23 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-@Schema(description = "커뮤니티 게시글 테이블")
+@Schema(description = "커뮤니티 피드 테이블")
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "community_board")
-public class Board {
+@Table(name = "community_feed")
+public class Feed {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_idx")
+    @Column(name = "feed_idx")
     private Long id;
 
     @Column(nullable = false)
     private String title;
+
+    @Column(name = "image_url")
+    private String imagePath;
 
     @Column(name = "regist_ip")
     private String registIp;
@@ -37,10 +40,6 @@ public class Board {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_idx")
     private Member member;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_idx")
-    private BoardMenu boardMenu;
 
     @Column(nullable = false)
     @ColumnDefault("false")
@@ -58,11 +57,11 @@ public class Board {
     private Date deleteDate;
 
     @Builder
-    public Board(String title, String content, String registIp, Member member, BoardMenu boardMenu) {
+    public Feed(String title, String imagePath, String content, String registIp, Member member) {
         this.title = title;
+        this.imagePath = imagePath;
         this.content = content;
         this.registIp = registIp;
         this.member = member;
-        this.boardMenu = boardMenu;
     }
 }
