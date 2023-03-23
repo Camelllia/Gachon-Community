@@ -33,7 +33,7 @@ public class FeedService {
 
     public ResponseEntity<?> create(FeedCreateRequest request) throws IOException {
 
-        String filePath = "/Users/user/Documents/uploads/";
+        String filePath = "YOUR FILE PATH";
 
         // Authentication 바탕으로 Member 조회
         Member member = memberRepository.findByMemberId(Long.parseLong(SecurityUtil.getCurrentMemberId()))
@@ -50,6 +50,7 @@ public class FeedService {
             String fileName = UUID.randomUUID().toString() + "." + extension;
             filePath += fileName;
 
+            System.out.println("File = " + request.getImageFile());
             request.getImageFile().transferTo(new File(filePath));
         }
 
