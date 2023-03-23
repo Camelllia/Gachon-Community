@@ -5,6 +5,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,5 +57,10 @@ public class CommonUtil {
             err = true;
         }
         return err;
+    }
+
+    public boolean isValidExtension(String extension) {
+        List<String> allowedExtensions = Arrays.asList("jpg", "jpeg", "png");
+        return allowedExtensions.contains(extension.toLowerCase());
     }
 }

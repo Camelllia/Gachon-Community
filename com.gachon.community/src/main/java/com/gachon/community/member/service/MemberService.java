@@ -2,7 +2,7 @@ package com.gachon.community.member.service;
 
 import com.gachon.community.util.common.CommonUtil;
 import com.gachon.community.member.domain.Member;
-import com.gachon.community.member.exception.InvaildEmailPatternException;
+import com.gachon.community.member.exception.InvalidEmailPatternException;
 import com.gachon.community.member.exception.MemberNotFoundException;
 import com.gachon.community.member.exception.OverlapMemberInfoException;
 import com.gachon.community.member.exception.PasswordMismatchException;
@@ -47,7 +47,7 @@ public class MemberService {
 
         // 이메일 형식 검사
         if(!commonUtil.isValidEmail(request.getEmail())) {
-            throw new InvaildEmailPatternException();
+            throw new InvalidEmailPatternException();
         }
 
         // 존재하는 이메일/닉네임
