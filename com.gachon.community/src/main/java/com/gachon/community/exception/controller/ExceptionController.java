@@ -2,6 +2,7 @@ package com.gachon.community.exception.controller;
 
 import com.gachon.community.board.exception.BoardNotFoundException;
 import com.gachon.community.exception.response.ErrorResponse;
+import com.gachon.community.feed.exception.FeedNotFoundException;
 import com.gachon.community.feed.exception.InvalidExtensionException;
 import com.gachon.community.member.exception.*;
 import com.gachon.community.menu.exception.MenuNotFoundException;
@@ -111,10 +112,22 @@ public class ExceptionController {
         return errorResponse;
     }
 
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(InvalidExtensionException.class)
     @ResponseBody
     public ErrorResponse invaildRequestHandler(InvalidExtensionException e) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code("400")
+                .message(e.getMessage())
+                .build();
+
+        return errorResponse;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(FeedNotFoundException.class)
+    @ResponseBody
+    public ErrorResponse invaildRequestHandler(FeedNotFoundException e) {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .code("400")
                 .message(e.getMessage())

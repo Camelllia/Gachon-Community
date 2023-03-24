@@ -1,6 +1,9 @@
 package com.gachon.community.feed.service;
 
+import com.gachon.community.board.exception.BoardNotFoundException;
+import com.gachon.community.board.response.BoardResponse;
 import com.gachon.community.feed.domain.Feed;
+import com.gachon.community.feed.exception.FeedNotFoundException;
 import com.gachon.community.feed.exception.InvalidExtensionException;
 import com.gachon.community.feed.repository.FeedRepository;
 import com.gachon.community.feed.request.FeedCreateRequest;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -50,7 +54,6 @@ public class FeedService {
             String fileName = UUID.randomUUID().toString() + "." + extension;
             filePath += fileName;
 
-            System.out.println("File = " + request.getImageFile());
             request.getImageFile().transferTo(new File(filePath));
         }
 
@@ -65,5 +68,16 @@ public class FeedService {
         feedRepository.save(feed);
 
         return new ResponseEntity<>(new FeedResponse(feed), HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getFeedList() {
+        return new ResponseEntity<>(feedRepository.getFeedList().stream()
+                .map(FeedResponse::new)
+                .collect(Collectors.toList()), HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getFeedItem(Long feedId) {
+        return new ResponseEntity<>(new FeedResponse(feedRepository.getFeedItem(feedId)
+                .orElseThrow(FeedNotFoundException::new)), HttpStatus.OK);
     }
 }
