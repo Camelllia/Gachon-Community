@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers( "/api/member/join", "/api/member/login", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .antMatchers( "/api/member/join", "/api/member/login", "/swagger-ui/**", "/v3/api-docs/**", "/api/game/**").permitAll()
                 .antMatchers("/community/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()

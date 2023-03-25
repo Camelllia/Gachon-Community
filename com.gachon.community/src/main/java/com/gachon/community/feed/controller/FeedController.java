@@ -49,7 +49,7 @@ public class FeedController {
         return feedService.getFeedList();
     }
 
-    @Operation(summary = "피드 조회", description = "피드 리스트 조회 API")
+    @Operation(summary = "피드 조회", description = "피드 조회 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "조회 성공 케이스", content = @Content(schema = @Schema(implementation = FeedResponse.class))),
             @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),

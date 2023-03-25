@@ -67,6 +67,9 @@ public class FeedService {
 
         feedRepository.save(feed);
 
+        log.info("CREATE NEW FEED ITEM : {}", feed);
+        log.info("CREATE NEW FEED ITEM REGISTRATION IP : {}", commonUtil.getIp());
+
         return new ResponseEntity<>(new FeedResponse(feed), HttpStatus.OK);
     }
 
