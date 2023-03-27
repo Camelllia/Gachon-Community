@@ -7,6 +7,7 @@ import com.gachon.community.game.response.UserInfoResponse;
 import com.gachon.community.member.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -19,7 +20,8 @@ public class GameService {
 
     private final RestTemplate restTemplate;
 
-    private final String API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJYLUFwcC1SYXRlLUxpbWl0IjoiNTAwOjEwIiwiYWNjb3VudF9pZCI6IjE2Mjc5MzcwNTAiLCJhdXRoX2lkIjoiMiIsImV4cCI6MTY5NTI3MzA5OSwiaWF0IjoxNjc5NzIxMDk5LCJuYmYiOjE2Nzk3MjEwOTksInNlcnZpY2VfaWQiOiI0MzAwMTEzOTMiLCJ0b2tlbl90eXBlIjoiQWNjZXNzVG9rZW4ifQ.GAkNx8UlkfTlPSFeeCJBc1CGuugJnhb45NWcaPDKZMk";
+    @Value("${nexon.openapi.key}")
+    private String API_KEY;
 
     public ResponseEntity<?> search(String nickName) {
 
