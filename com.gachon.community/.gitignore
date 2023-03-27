@@ -25,7 +25,7 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-application-API-KEY.yml
+!**/src/test/**/resources/application-API-KEY.yml
 
 ### NetBeans ###
 /nbproject/private/
