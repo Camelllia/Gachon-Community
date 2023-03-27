@@ -45,4 +45,12 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                 .where(board.id.eq(boardId))
                 .execute();
     }
+
+    @Override
+    public long delete(Long boardId) {
+        return jpaQueryFactory.update(board)
+                .set(board.delYn, Boolean.TRUE)
+                .where(board.id.eq(boardId))
+                .execute();
+    }
 }

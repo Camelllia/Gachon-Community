@@ -13,4 +13,6 @@ public interface BoardCustomRepository {
     Optional<Board> getBoardItem(Long menuId, Long boardId);
 
     long update(Long boardId, BoardUpdateRequest request);
+
+    long delete(Long boardId);
 }

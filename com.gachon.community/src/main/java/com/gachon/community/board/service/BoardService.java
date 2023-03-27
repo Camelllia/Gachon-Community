@@ -87,4 +87,14 @@ public class BoardService {
 
         return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
     }
+
+    @Transactional
+    public ResponseEntity<?> delete(Long boardId) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(BoardNotFoundException::new);
+
+        boardRepository.delete(boardId);
+
+        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+    }
 }

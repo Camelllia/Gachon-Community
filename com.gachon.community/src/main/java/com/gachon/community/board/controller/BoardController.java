@@ -65,4 +65,14 @@ public class BoardController {
     public ResponseEntity<?> update(@PathVariable("boardId") Long boardId, @RequestBody @Valid BoardUpdateRequest request) {
         return boardService.update(boardId, request);
     }
+
+    @Operation(summary = "게시글 삭제", description = "게시글 삭제 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "삭제 성공 케이스", content = @Content(schema = @Schema(implementation = Boolean.class))),
+            @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+    @PatchMapping("/{boardId}/delete")
+    public ResponseEntity<?> delete(@PathVariable("boardId") Long boardId) {
+        return boardService.delete(boardId);
+    }
 }
