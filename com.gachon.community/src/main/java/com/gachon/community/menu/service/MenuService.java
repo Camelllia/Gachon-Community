@@ -50,8 +50,10 @@ public class MenuService {
 
     @Transactional
     public ResponseEntity<?> delete(Long id) {
-        BoardMenu boardMenu = menuRepository.findByMenuId(id)
-                .orElseThrow(MenuNotFoundException::new);
+
+        if(!menuRepository.existsById(id)) {
+            throw new MenuNotFoundException();
+        }
 
         menuRepository.delete(id);
 

@@ -1,7 +1,6 @@
 package com.gachon.community.menu.controller;
 
 import com.gachon.community.exception.response.ErrorResponse;
-import com.gachon.community.feed.response.FeedResponse;
 import com.gachon.community.menu.request.MenuCreateRequest;
 import com.gachon.community.menu.response.BoardMenuResponse;
 import com.gachon.community.menu.service.MenuService;

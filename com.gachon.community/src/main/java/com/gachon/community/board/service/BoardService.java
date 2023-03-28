@@ -43,8 +43,10 @@ public class BoardService {
     }
 
     public ResponseEntity<?> getBoardItem(Long menuId, Long boardId) {
-        BoardMenu boardMenu = menuRepository.findByMenuId(menuId)
-                .orElseThrow(MenuNotFoundException::new);
+
+        if(!menuRepository.existsById(menuId)) {
+            throw new MenuNotFoundException();
+        }
 
         return new ResponseEntity<>(new BoardResponse(boardRepository.getBoardItem(menuId, boardId)
                 .orElseThrow(BoardNotFoundException::new)), HttpStatus.OK);
@@ -80,8 +82,10 @@ public class BoardService {
 
     @Transactional
     public ResponseEntity<?> update(Long boardId, BoardUpdateRequest request) {
-        Board board = boardRepository.findById(boardId)
-                .orElseThrow(BoardNotFoundException::new);
+
+        if(!boardRepository.existsById(boardId)) {
+            throw new BoardNotFoundException();
+        }
 
         boardRepository.update(boardId, request);
 
@@ -90,8 +94,10 @@ public class BoardService {
 
     @Transactional
     public ResponseEntity<?> delete(Long boardId) {
-        Board board = boardRepository.findById(boardId)
-                .orElseThrow(BoardNotFoundException::new);
+
+        if(!boardRepository.existsById(boardId)) {
+            throw new BoardNotFoundException();
+        }
 
         boardRepository.delete(boardId);
 
