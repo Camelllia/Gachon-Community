@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers( "/api/member/join", "/api/member/login", "/swagger-ui/**", "/v3/api-docs/**", "/api/game/**").permitAll()
-                .antMatchers("/community/**").hasRole("USER")
+                .antMatchers("/api/board/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);

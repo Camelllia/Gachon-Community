@@ -7,6 +7,7 @@ import com.gachon.community.feed.exception.InvalidExtensionException;
 import com.gachon.community.game.exception.GameMemberNotFoundException;
 import com.gachon.community.member.exception.*;
 import com.gachon.community.menu.exception.MenuNotFoundException;
+import com.gachon.community.menu.exception.OverlapMenuNameException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -141,6 +142,18 @@ public class ExceptionController {
     @ExceptionHandler(GameMemberNotFoundException.class)
     @ResponseBody
     public ErrorResponse invaildRequestHandler(GameMemberNotFoundException e) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code("400")
+                .message(e.getMessage())
+                .build();
+
+        return errorResponse;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(OverlapMenuNameException.class)
+    @ResponseBody
+    public ErrorResponse invaildRequestHandler(OverlapMenuNameException e) {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .code("400")
                 .message(e.getMessage())

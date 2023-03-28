@@ -26,7 +26,7 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @Operation(summary = "게시글 리스트 조회", description = "게시글 리스트 조회 API")
+    @Operation(summary = "게시글 리스트 조회", description = "메뉴 기반 게시글 리스트 조회 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "조회 성공 케이스", content = @Content(array = @ArraySchema(schema = @Schema(implementation = BoardResponse.class)))),
             @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),

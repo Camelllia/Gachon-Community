@@ -14,10 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -47,5 +44,15 @@ public class MemberController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid MemberLoginRequest request) {
         return memberService.login(request);
+    }
+
+    @Operation(summary = "회원 탈퇴", description = "회원 탈퇴 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "삭제 성공 케이스", content = @Content(schema = @Schema(implementation = Boolean.class))),
+            @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+    @PatchMapping("/{memberId}/delete")
+    public ResponseEntity<?> delete(@PathVariable("memberId") Long memberId) {
+        return memberService.delete(memberId);
     }
 }

@@ -37,4 +37,12 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
                 .where(member.delYn.eq(Boolean.FALSE))
                 .fetchOne());
     }
+
+    @Override
+    public long delete(Long id) {
+        return jpaQueryFactory.update(member)
+                .set(member.delYn, Boolean.TRUE)
+                .where(member.id.eq(id))
+                .execute();
+    }
 }

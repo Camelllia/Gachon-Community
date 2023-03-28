@@ -11,4 +11,6 @@ public interface MemberCustomRepository {
     Optional<Member> findByEmail(String email);
 
     Optional<Member> findByMemberId(Long id);
+
+    long delete(Long id);
 }

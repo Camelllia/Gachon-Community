@@ -22,6 +22,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -101,7 +102,17 @@ public class MemberService {
         return new ResponseEntity<>(tokenInfo, HttpStatus.OK);
     }
 
-    public boolean passwordValidator(Member member, String password) {
+    @Transactional
+    public ResponseEntity<?> delete(Long memberId) {
+        Member member = memberRepository.findByMemberId(memberId)
+                .orElseThrow(MemberNotFoundException::new);
+
+        memberRepository.delete(memberId);
+
+        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+    }
+
+    private boolean passwordValidator(Member member, String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.matches(password, member.getPassword());
     }

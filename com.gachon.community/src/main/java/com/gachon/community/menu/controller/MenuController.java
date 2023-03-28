@@ -1,6 +1,7 @@
 package com.gachon.community.menu.controller;
 
 import com.gachon.community.exception.response.ErrorResponse;
+import com.gachon.community.menu.request.MenuCreateRequest;
 import com.gachon.community.menu.response.BoardMenuResponse;
 import com.gachon.community.menu.service.MenuService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,9 +13,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Tag(name = "BOARD MENU", description = "게시글 메뉴 API")
 @RestController
@@ -32,5 +33,15 @@ public class MenuController {
     @GetMapping("/menus")
     public ResponseEntity<?> getMenuList() {
         return menuService.getMenuList();
+    }
+
+    @Operation(summary = "게시글 메뉴 생성", description = "메뉴 생성 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "생성 성공 케이스", content = @Content(array = @ArraySchema(schema = @Schema(implementation = BoardMenuResponse.class)))),
+            @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@RequestBody @Valid MenuCreateRequest request) {
+        return menuService.create(request);
     }
 }
