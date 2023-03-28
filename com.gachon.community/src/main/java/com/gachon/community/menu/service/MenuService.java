@@ -1,6 +1,7 @@
 package com.gachon.community.menu.service;
 
 import com.gachon.community.menu.domain.BoardMenu;
+import com.gachon.community.menu.exception.MenuNotFoundException;
 import com.gachon.community.menu.exception.OverlapMenuNameException;
 import com.gachon.community.menu.repository.MenuRepository;
 import com.gachon.community.menu.request.MenuCreateRequest;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
@@ -30,7 +32,6 @@ public class MenuService {
     }
 
     public ResponseEntity<?> create(MenuCreateRequest request) {
-
         if(menuRepository.existsByName(request.getName())) {
             throw new OverlapMenuNameException();
         }
@@ -45,5 +46,15 @@ public class MenuService {
         log.info("CREATE NEW BOARD ITEM REGISTRATION IP : {}", commonUtil.getIp());
 
         return new ResponseEntity<>(new BoardMenuResponse(boardMenu), HttpStatus.OK);
+    }
+
+    @Transactional
+    public ResponseEntity<?> delete(Long id) {
+        BoardMenu boardMenu = menuRepository.findByMenuId(id)
+                .orElseThrow(MenuNotFoundException::new);
+
+        menuRepository.delete(id);
+
+        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
     }
 }

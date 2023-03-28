@@ -50,6 +50,7 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     public long delete(Long boardId) {
         return jpaQueryFactory.update(board)
                 .set(board.delYn, Boolean.TRUE)
+                .set(board.deleteDate, Expressions.currentTimestamp())
                 .where(board.id.eq(boardId))
                 .execute();
     }

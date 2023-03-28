@@ -2,6 +2,8 @@ package com.gachon.community.member.repository;
 
 import com.gachon.community.member.domain.Member;
 import static com.gachon.community.member.domain.QMember.member;
+
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.util.Optional;
@@ -42,6 +44,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     public long delete(Long id) {
         return jpaQueryFactory.update(member)
                 .set(member.delYn, Boolean.TRUE)
+                .set(member.deleteDate, Expressions.currentTimestamp())
                 .where(member.id.eq(id))
                 .execute();
     }

@@ -1,6 +1,7 @@
 package com.gachon.community.menu.controller;
 
 import com.gachon.community.exception.response.ErrorResponse;
+import com.gachon.community.feed.response.FeedResponse;
 import com.gachon.community.menu.request.MenuCreateRequest;
 import com.gachon.community.menu.response.BoardMenuResponse;
 import com.gachon.community.menu.service.MenuService;
@@ -37,11 +38,21 @@ public class MenuController {
 
     @Operation(summary = "게시글 메뉴 생성", description = "메뉴 생성 API")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "생성 성공 케이스", content = @Content(array = @ArraySchema(schema = @Schema(implementation = BoardMenuResponse.class)))),
+            @ApiResponse(responseCode = "200", description = "등록 성공 케이스", content = @Content(schema = @Schema(implementation = BoardMenuResponse.class))),
             @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody @Valid MenuCreateRequest request) {
         return menuService.create(request);
+    }
+
+    @Operation(summary = "게시글 메뉴 삭제", description = "메뉴 삭제 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "삭제 성공 케이스", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Boolean.class)))),
+            @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+    @PatchMapping("/{id}/delete")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        return menuService.delete(id);
     }
 }

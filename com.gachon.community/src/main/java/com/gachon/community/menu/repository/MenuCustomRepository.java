@@ -10,4 +10,6 @@ public interface MenuCustomRepository {
     List<BoardMenu> getMenuList();
 
     Optional<BoardMenu> findByMenuId(Long menuId);
+
+    long delete(Long id);
 }
