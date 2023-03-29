@@ -30,7 +30,7 @@ public class MenuController {
             @ApiResponse(responseCode = "200", description = "조회 성공 케이스", content = @Content(array = @ArraySchema(schema = @Schema(implementation = BoardMenuResponse.class)))),
             @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
-    @GetMapping("/menus")
+    @GetMapping("/list")
     public ResponseEntity<?> getMenuList() {
         return menuService.getMenuList();
     }

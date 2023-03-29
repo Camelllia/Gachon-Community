@@ -2,6 +2,7 @@ package com.gachon.community.game.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gachon.community.game.exception.GameMemberNotFoundException;
+import com.gachon.community.game.response.MatchDetailDTO;
 import com.gachon.community.game.response.MatchResponseDTO;
 import com.gachon.community.game.response.UserInfoResponse;
 import com.gachon.community.member.exception.MemberNotFoundException;
@@ -38,6 +39,23 @@ public class GameService {
             MatchResponseDTO matchResponseDTO = restTemplate.exchange(matchInfoUrl, HttpMethod.GET, entity, MatchResponseDTO.class, userInfoResponse.getAccessId()).getBody();
 
             return new ResponseEntity<>(matchResponseDTO, HttpStatus.OK);
+        } catch (HttpClientErrorException e) {
+            throw new GameMemberNotFoundException();
+        }
+    }
+
+    public ResponseEntity<?> detail(String matchId) {
+        final String matchDetailUrl = "https://api.nexon.co.kr/kart/v1.0/matches/{match_id}";
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Authorization", API_KEY);
+
+        final HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
+
+        try {
+            MatchDetailDTO matchDetailDTO = restTemplate.exchange(matchDetailUrl, HttpMethod.GET, entity, MatchDetailDTO.class, matchId).getBody();
+
+            return new ResponseEntity<>(matchDetailDTO, HttpStatus.OK);
         } catch (HttpClientErrorException e) {
             throw new GameMemberNotFoundException();
         }
