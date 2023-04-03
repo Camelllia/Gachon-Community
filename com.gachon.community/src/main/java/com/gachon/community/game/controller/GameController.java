@@ -4,6 +4,7 @@ import com.gachon.community.board.response.BoardResponse;
 import com.gachon.community.exception.response.ErrorResponse;
 import com.gachon.community.game.response.MatchDetailDTO;
 import com.gachon.community.game.response.MatchResponseDTO;
+import com.gachon.community.game.response.SummonerDTO;
 import com.gachon.community.game.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -27,23 +28,13 @@ public class GameController {
 
     private final GameService gameService;
 
-    @Operation(summary = "유저 전적 조회", description = "카트라이더 전적 조회 API")
+    @Operation(summary = "유저 정보 조회", description = "LOL 소환사명으로 유저 정보 조회 API")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "조회 성공 케이스", content = @Content(schema = @Schema(implementation = MatchResponseDTO.class))),
+            @ApiResponse(responseCode = "200", description = "조회 성공 케이스", content = @Content(schema = @Schema(implementation = SummonerDTO.class))),
             @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
-    @GetMapping("/match-search/{nickName}")
-    public ResponseEntity<?> search(@PathVariable("nickName") String nickName) {
-        return gameService.search(nickName);
-    }
-
-    @Operation(summary = "매치 상세 정보 조회", description = "특정 매치 상세 정보 조회 API")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "조회 성공 케이스", content = @Content(schema = @Schema(implementation = MatchDetailDTO.class))),
-            @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
-    })
-    @GetMapping("/match-search/detail/{matchId}")
-    public ResponseEntity<?> detail(@PathVariable("matchId") String matchId) {
-        return gameService.detail(matchId);
+    @GetMapping("/summoner-search/{summonerName}")
+    public ResponseEntity<?> summonerSearch(@PathVariable("summonerName") String summonerName) {
+        return gameService.summonerSearch(summonerName);
     }
 }

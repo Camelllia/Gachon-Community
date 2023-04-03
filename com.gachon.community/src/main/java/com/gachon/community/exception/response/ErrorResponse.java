@@ -10,7 +10,7 @@ public class ErrorResponse {
     @Schema(description = "코드", example = "400")
     private final String code;
 
-    @Schema(description = "메세지", example = "이메일 형식이 아닙니다.")
+    @Schema(description = "메세지", example = "에러메세지입니다")
     private final String message;
 
     @Builder
