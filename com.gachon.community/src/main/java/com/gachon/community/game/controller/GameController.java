@@ -2,8 +2,7 @@ package com.gachon.community.game.controller;
 
 import com.gachon.community.board.response.BoardResponse;
 import com.gachon.community.exception.response.ErrorResponse;
-import com.gachon.community.game.response.MatchDetailDTO;
-import com.gachon.community.game.response.MatchResponseDTO;
+import com.gachon.community.game.response.MatchDTO;
 import com.gachon.community.game.response.SummonerDTO;
 import com.gachon.community.game.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,7 +29,7 @@ public class GameController {
 
     @Operation(summary = "유저 정보 조회", description = "LOL 소환사명으로 유저 정보 조회 API")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "조회 성공 케이스", content = @Content(schema = @Schema(implementation = SummonerDTO.class))),
+            @ApiResponse(responseCode = "200", description = "조회 성공 케이스", content = @Content(array = @ArraySchema(schema = @Schema(implementation = MatchDTO.class)))),
             @ApiResponse(responseCode = "400", description = "예외 발생 케이스", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/summoner-search/{summonerName}")
