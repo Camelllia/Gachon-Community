@@ -18,7 +18,7 @@
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=61DAFB)
 ![Junit5](https://img.shields.io/badge/Junit5-25A162?style=for-the-badge&logo=Junit5&logoColor=61DAFB)
 
-### Deploy(Expected)
+### Deploy
 ![Apache Tomcat](https://img.shields.io/badge/Apache%20Tomcat-F8DC75?style=for-the-badge&logo=Apache%20Tomcat&logoColor=61DAFB)
 ![Amazon EC2](https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=Amazon%20EC2&logoColor=61DAFB)
 ![Amazon RDS](https://img.shields.io/badge/Amazon%20RDS-527FFF?style=for-the-badge&logo=Amazon%20RDS&logoColor=61DAFB)
