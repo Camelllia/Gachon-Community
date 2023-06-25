@@ -22,7 +22,3 @@
 ![Apache Tomcat](https://img.shields.io/badge/Apache%20Tomcat-F8DC75?style=for-the-badge&logo=Apache%20Tomcat&logoColor=61DAFB)
 ![Amazon EC2](https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=Amazon%20EC2&logoColor=61DAFB)
 ![Amazon RDS](https://img.shields.io/badge/Amazon%20RDS-527FFF?style=for-the-badge&logo=Amazon%20RDS&logoColor=61DAFB)
-
-## API Server ENV(Expected)
-> **DEV** : [http://dev-gc-community-pf-api.com](http://dev-gc-community-pf-api.com)<br>
-> **PROD** : [http://gc-community-pf-api.com](http://gc-community-pf-api.com)<br>
